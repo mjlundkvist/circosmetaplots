@@ -9,6 +9,8 @@ Year Plot
 The year plot is based around the visualization of the year as a circle. Each week has a corresponding ideogram, which is coloured after the total amount of reads for that air filter, making it a heat map. 
 The ideograms of the weeks that were not sequenced are left as white. 
 
+.. image:: images/ex_year.png
+
 Outside the year circle the amplicon reads are plotted in heat maps. While only reads for every other week were presented, the field representing those weeks were 
 widened to go halfway across the neighbouring weeks as well. This was done to avoid the gaps that would make it hard to follow the heat map around the year. 
 Otherwise the regularly spaced gaps would lure the viewers eye to follow the lines created by the gaps rather than heat map rings. 
@@ -39,6 +41,8 @@ with the plot depicting the direct descendants in the clade, and the successive 
 Taxonomy Plot
 -------------
 The taxonomy plot is at its base a hierarchal donut chart, which is surrounded by rings of heat maps. The OTUs from air filters from one station and one year are visualized in the plot.
+
+.. image:: images/tax.png
 
 The hierarchal donut chart displays the taxonomy of the OTUs. The OTUs are divided and coloured after the highest taxonomic rank, which is usually kingdom. 
 The taxonomic ranks are displayed with the highest rank closest to the center of the donut, followed by successive lower ranks going out from the center of the donut.
@@ -100,10 +104,13 @@ Weather data file
 The general weather data with one value per day is in one file, while the wind direction data that has one value per hour has its own file. 
 Both the weather data files should have columns with the year, month, day, the date and week. The weather parameter columns should be grouped after city, with the city name given on the line above. 
 Since weeks may overlap years, weather data from the preceeding and following year need to also be included in the file.
+::
 					LJUNGBYHED	LJUNGBYHED	KIRUNA	KIRUNA	
 YYYY	MM	DD	Date	WW	Temperature	Precipitation	Temperature	Precipitation
 
 Wind direction file is formatted the same way:
+
+::
 						STOCKHOLM	
 YYYY	MM	DD	Date	WW	UTC	Wind Direction
 
