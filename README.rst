@@ -9,7 +9,7 @@ Year Plot
 The year plot is based around the visualization of the year as a circle. Each week has a corresponding ideogram, which is coloured after the total amount of reads for that air filter, making it a heat map. 
 The ideograms of the weeks that were not sequenced are left as white. 
 
-.. image:: images/ex_year.png
+.. image:: ex_year.png
 
 Outside the year circle the amplicon reads are plotted in heat maps. While only reads for every other week were presented, the field representing those weeks were 
 widened to go halfway across the neighbouring weeks as well. This was done to avoid the gaps that would make it hard to follow the heat map around the year. 
@@ -42,7 +42,7 @@ Taxonomy Plot
 -------------
 The taxonomy plot is at its base a hierarchal donut chart, which is surrounded by rings of heat maps. The OTUs from air filters from one station and one year are visualized in the plot.
 
-.. image:: images/tax.png
+.. image:: ex_tax.png
 
 The hierarchal donut chart displays the taxonomy of the OTUs. The OTUs are divided and coloured after the highest taxonomic rank, which is usually kingdom. 
 The taxonomic ranks are displayed with the highest rank closest to the center of the donut, followed by successive lower ranks going out from the center of the donut.
@@ -77,11 +77,14 @@ yplot=cmp.YearPlot([read files], place, year, weather file, wind direction file)
 then use function yplot.run(rank, circos) to do a whol run down to the given taxonomic rank, or yplot.run_single(rank, taxon, circos) to do a single plot of the given taxon.
 
 tplot=cmp.TaxonomyPlot([read files], weather file, place, year, start_rank, stop_rank)
+
 tplot.run(circos)
 
 Season calculation will fail if the temperatures don't match Swedish climate, for example if summer never ends (=mean temperature doesn't drop under 10 degrees C).
 To not plot seasons, 
-do: yplot.run(rank, circos, False), or yplot.run_single(rank, taxon, circos, False)
+do: 
+
+yplot.run(rank, circos, False), or yplot.run_single(rank, taxon, circos, False)
 or tplot.run(circos, False)
 
 to skip that part.
@@ -94,25 +97,25 @@ Read Data
 ---------
 The read data format is basically Qiime's output, but each column should be named in the form location-year-week. The first line is expected to be a comment, and will be ignored. The OTU identifiers are in a column called '\#OTU ID', which are used as indexes. The taxonomy of the OTUs are in a column called 'taxonomy', with the names for each rank preceded with the first letter of the rank and two underscores. For example, the kingdom of Fungi should be written as k$\_\_$Fungi. The different ranks of taxonomy should be separated by semicolons. OTUs without assigned taxonomy should either be called 'Unassigned' or 'No blast hit'. For OTUs that are unclassified for part of their taxonomy the unclassified ranks can either be entirely missing, have missing names, or have 'unspecified' or 'unidentified' in place of the name of the rank.   
 
-Partially unclassified OTUs should be named 'unspecified', 'unclassified' or be empty on those ranks. Entirely unclassified OTUs are either 'Unassigned' or 'No blast hit'.
-# Constructed from biom file
-#OTU ID	Kiruna-2006-1	Kiruna-2006-3	...	Kiruna-2006-51	 taxonomy
-1050608	0.0	30.0	...	0.0		k__kingdom; p__phylum; c__class; o__order; f__family; g__genus; s__species
+Partially unclassified OTUs should be named 'unspecified', 'unclassified' or be empty on those ranks. Entirely unclassified OTUs are either 'Unassigned' or 'No blast hit'. ::
+
+ # Constructed from biom file
+ #OTU ID	Kiruna-2006-1	Kiruna-2006-3	...	Kiruna-2006-51	 taxonomy
+ 1050608	0.0	30.0	...	0.0		k__kingdom; p__phylum; c__class; o__order; f__family; g__genus; s__species
 
 Weather data file
 -----------------
 The general weather data with one value per day is in one file, while the wind direction data that has one value per hour has its own file. 
 Both the weather data files should have columns with the year, month, day, the date and week. The weather parameter columns should be grouped after city, with the city name given on the line above. 
-Since weeks may overlap years, weather data from the preceeding and following year need to also be included in the file.
-::
-					LJUNGBYHED	LJUNGBYHED	KIRUNA	KIRUNA	
-YYYY	MM	DD	Date	WW	Temperature	Precipitation	Temperature	Precipitation
+Since weeks may overlap years, weather data from the preceeding and following year need to also be included in the file. ::
 
-Wind direction file is formatted the same way:
+ 					LJUNGBYHED	LJUNGBYHED	KIRUNA	KIRUNA	
+ YYYY	MM	DD	Date	WW	Temperature	Precipitation	Temperature	Precipitation
 
-::
-						STOCKHOLM	
-YYYY	MM	DD	Date	WW	UTC	Wind Direction
+Wind direction file is formatted the same way.::
+
+							STOCKHOLM	
+ YYYY	MM	DD	Date	WW	UTC	Wind Direction
 
 Season Definition
 -----------------
